@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#070524">
+  <meta name="description" content="Search live weather conditions and a seven-day forecast for cities worldwide.">
+  <link rel="icon" type="image/png" href="./favicon-32x32.png">
+  <link rel="stylesheet" href="./styles.css">
+  <script src="./app.js" defer></script>
+  <title>Weather Now</title>
+</head>
+<body>
+  <div class="shell">
+    <header class="site-header">
+      <a class="brand" href="./" aria-label="Weather Now home"><img src="./logo.svg" alt="Weather Now"></a>
+      <div class="units-wrap">
+        <button class="units-button" id="units-button" type="button" aria-expanded="false" aria-controls="units-menu"><img src="./icon-units.svg" alt=""> Units <img class="chevron" src="./icon-dropdown.svg" alt=""></button>
+        <div class="units-menu" id="units-menu" hidden>
+          <button class="unit-switch" id="unit-switch" type="button">Switch to Imperial</button>
+          <p>Temperature</p>
+          <button class="unit-option" type="button" data-unit="temperature" data-value="celsius">Celsius (°C)<span aria-hidden="true"></span></button>
+          <button class="unit-option" type="button" data-unit="temperature" data-value="fahrenheit">Fahrenheit (°F)<span aria-hidden="true"></span></button>
+          <p>Wind speed</p>
+          <button class="unit-option" type="button" data-unit="wind" data-value="kmh">km/h<span aria-hidden="true"></span></button>
+          <button class="unit-option" type="button" data-unit="wind" data-value="mph">mph<span aria-hidden="true"></span></button>
+          <p>Precipitation</p>
+          <button class="unit-option" type="button" data-unit="precipitation" data-value="mm">Millimeters (mm)<span aria-hidden="true"></span></button>
+          <button class="unit-option" type="button" data-unit="precipitation" data-value="inch">Inches (in)<span aria-hidden="true"></span></button>
+        </div>
+      </div>
+    </header>
+    <main>
+      <h1>How’s the sky looking today?</h1>
+      <div class="search-area">
+        <form id="search-form" class="search-form" autocomplete="off">
+          <div class="search-field"><img src="./icon-search.svg" alt=""><label class="sr-only" for="city-input">Search for a place</label><input id="city-input" name="city" type="search" placeholder="Search for a place..." minlength="2" required aria-describedby="search-message" aria-controls="suggestions" aria-expanded="false"></div>
+          <button class="search-submit" type="submit">Search</button>
+        </form>
+        <div class="suggestions" id="suggestions" hidden></div>
+        <p class="search-message" id="search-message" role="status" aria-live="polite"></p>
+      </div>
+      <div class="dashboard" id="dashboard" aria-busy="true">
+        <div class="dashboard-main">
+          <section class="today-card" aria-label="Current weather"><div class="today-place"><h2 id="place-name">Loading weather…</h2><p id="today-date">&nbsp;</p></div><div class="today-condition"><img id="today-icon" src="./icon-sunny.webp" alt=""><span id="today-temp">--°</span></div></section>
+          <section class="metrics" aria-label="Weather details"><div class="metric"><h3>Feels like</h3><p id="feels-like">--°</p></div><div class="metric"><h3>Humidity</h3><p id="humidity">--%</p></div><div class="metric"><h3>Wind</h3><p id="wind">-- km/h</p></div><div class="metric"><h3>Precipitation</h3><p id="precipitation">-- mm</p></div></section>
+          <section class="daily-section" aria-labelledby="daily-title"><h2 id="daily-title">Daily forecast</h2><div class="daily-grid" id="daily-grid"></div></section>
+        </div>
+        <section class="hourly-panel" aria-labelledby="hourly-title"><div class="hourly-header"><h2 id="hourly-title">Hourly forecast</h2><label class="sr-only" for="day-select">Choose forecast day</label><select id="day-select" aria-label="Choose forecast day"></select></div><div class="hourly-list" id="hourly-list"></div></section>
+      </div>
+      <div class="error-panel" id="error-panel" hidden><img src="./icon-error.svg" alt=""><h2>Something went wrong</h2><p id="error-text">We couldn’t load the weather. Please try again.</p><button id="retry-button" type="button"><img src="./icon-retry.svg" alt=""> Retry</button></div>
+    </main>
+  </div>
+</body>
+</html>
+
